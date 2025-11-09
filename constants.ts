@@ -1,0 +1,329 @@
+import { ExerciseSection } from './types';
+
+export const LOGO_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/f80998a6-1070-4d54-8e43-8f0a0c476839/ortholink.png';
+export const WELCOME_IMAGE_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/3565f42c-2321-4d32-8419-35c6b92f75a0/learning-companion-welcome.png';
+
+export const WILAYAS = [
+  "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra",
+  "Béchar", "Blida", "Bouira", "Tamanrasset", "Tébessa", "Tlemcen", "Tiaret",
+  "Tizi Ouzou", "Algiers", "Djelfa", "Jijel", "Sétif", "Saïda", "Skikda",
+  "Sidi Bel Abbès", "Annaba", "Guelma", "Constantine", "Médéa", "Mostaganem",
+  "M'Sila", "Mascara", "Ouargla", "Oran", "El Bayadh", "Illizi", "Bordj Bou Arréridj",
+  "Boumerdès", "El Tarf", "Tindouf", "Tissemsilt", "El Oued", "Khenchela",
+  "Souk Ahras", "Tipaza", "Mila", "Aïn Defla", "Naâma", "Aïn Témouchent",
+  "Ghardaïa", "Relizane", "Timimoun", "Bordj Badji Mokhtar", "Ouled Djellal",
+  "Béni Abbès", "In Salah", "In Guezzam", "Touggourt", "Djanet", "El M'Ghair",
+  "El Meniaa"
+];
+
+export const TEXTS = {
+  ar: {
+    appName: "Ortholink",
+    loginTitle: "تسجيل الدخول",
+    signupTitle: "إنشاء حساب جديد",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    firstName: "الاسم الأول",
+    lastName: "اللقب",
+    workplace: "مكان العمل",
+    wilaya: "الولاية",
+    selectWilaya: "اختر ولايتك",
+    role: "أنا",
+    therapist: "أخصائي",
+    parent: "ولي أمر",
+    login: "دخول",
+    signup: "تسجيل",
+    noAccount: "ليس لديك حساب؟",
+    haveAccount: "هل لديك حساب بالفعل؟",
+    createAccount: "أنشئ حسابًا",
+    welcome: "مرحباً بك",
+    dashboard: "لوحة التحكم",
+    logout: "تسجيل الخروج",
+    therapistDashboard: "لوحة تحكم الأخصائي",
+    parentDashboard: "لوحة تحكم ولي الأمر",
+    viewExercises: "عرض التمارين",
+    listen: "استمع",
+    record: "سجل",
+    stop: "إيقاف",
+    play: "تشغيل",
+    recording: "جاري التسجيل...",
+    checkAnswer: "تحقق",
+    correct: "صحيح!",
+    tryAgain: "حاول مرة أخرى",
+    masculine: "مذكر",
+    feminine: "مؤنث",
+    yourAnswer: "إجابتك:",
+    start: "بداية",
+    middle: "وسط",
+    end: "نهاية",
+    singular: "مفرد",
+    plural: "جمع",
+    allCorrect: "أحسنت! كل الإجابات صحيحة.",
+    timeUp: "انتهى الوقت!",
+    submit: "إرسال",
+    wordsTyped: "الكلمات المكتوبة:",
+    readingStage: "مرحلة القراءة",
+    letsGo: "هيا بنا!",
+  },
+  en: {
+    appName: "Ortholink",
+    loginTitle: "Login",
+    signupTitle: "Create New Account",
+    email: "Email",
+    password: "Password",
+    firstName: "First Name",
+    lastName: "Last Name",
+    workplace: "Workplace",
+    wilaya: "State (Wilaya)",
+    selectWilaya: "Select your Wilaya",
+    role: "I am a",
+    therapist: "Therapist",
+    parent: "Parent",
+    login: "Login",
+    signup: "Sign Up",
+    noAccount: "Don't have an account?",
+    haveAccount: "Already have an account?",
+    createAccount: "Create an account",
+    welcome: "Welcome",
+    dashboard: "Dashboard",
+    logout: "Logout",
+    therapistDashboard: "Therapist Dashboard",
+    parentDashboard: "Parent Dashboard",
+    viewExercises: "View Exercises",
+    listen: "Listen",
+    record: "Record",
+    stop: "Stop",
+    play: "Play",
+    recording: "Recording...",
+    checkAnswer: "Check",
+    correct: "Correct!",
+    tryAgain: "Try Again",
+    masculine: "Masculine",
+    feminine: "Feminine",
+    yourAnswer: "Your Answer:",
+    start: "Start",
+    middle: "Middle",
+    end: "End",
+    singular: "Singular",
+    plural: "Plural",
+    allCorrect: "Well done! All answers are correct.",
+    timeUp: "Time's up!",
+    submit: "Submit",
+    wordsTyped: "Words Typed:",
+    readingStage: "Reading Stage",
+    letsGo: "Let's Go!",
+  },
+};
+
+
+export const EXERCISE_SECTIONS: ExerciseSection[] = [
+  {
+    id: 'grammar-morphology',
+    title: { ar: 'القسم الأول: تمارين النحو والصرف', en: 'Part 1: Grammar and Morphology Exercises' },
+    exercises: [
+      {
+        id: 'drag-drop-gender-classification',
+        type: 'drag-drop-classification',
+        title: { ar: 'تصنيف (مذكر/مؤنث)', en: 'Classification (Masculine/Feminine)' },
+        categories: [
+          { id: 'masculine', title: { ar: 'مذكر', en: 'Masculine' } },
+          { id: 'feminine', title: { ar: 'مؤنث', en: 'Feminine' } },
+        ],
+        items: [
+          { id: 'dd-1', text: 'كتاب', correctCategoryId: 'masculine' },
+          { id: 'dd-2', text: 'أزهار', correctCategoryId: 'feminine' },
+          { id: 'dd-3', text: 'أولاد', correctCategoryId: 'masculine' },
+          { id: 'dd-4', text: 'تلميذة', correctCategoryId: 'feminine' },
+          { id: 'dd-5', text: 'وردة', correctCategoryId: 'feminine' },
+          { id: 'dd-6', text: 'رجال', correctCategoryId: 'masculine' },
+          { id: 'dd-7', text: 'حقيبة', correctCategoryId: 'feminine' },
+          { id: 'dd-8', text: 'كرسي', correctCategoryId: 'masculine' },
+          { id: 'dd-9', text: 'بنات', correctCategoryId: 'feminine' },
+          { id: 'dd-10', text: 'قمر', correctCategoryId: 'masculine' },
+          { id: 'dd-11', text: 'باب', correctCategoryId: 'masculine' },
+          { id: 'dd-12', text: 'مفتاح', correctCategoryId: 'masculine' },
+        ],
+      },
+      {
+        id: 'gender-selection',
+        type: 'gender-classification',
+        title: { ar: 'تحديد النوع بوضع علامة (✓)', en: 'Gender Selection' },
+        items: [
+            { id: 1, word: 'شمس', correctGender: 'feminine', emoji: '☀️' },
+            { id: 2, word: 'قلم', correctGender: 'masculine', emoji: '✏️' },
+            { id: 3, word: 'نملة', correctGender: 'feminine', emoji: '🐜' },
+            { id: 4, word: 'وردة', correctGender: 'feminine', emoji: '🌹' },
+            { id: 5, word: 'طفل', correctGender: 'masculine', emoji: '👶' },
+            { id: 6, word: 'بنت', correctGender: 'feminine', emoji: '👧' },
+        ]
+      },
+      {
+        id: 'sentence-transform-fem-to-masc',
+        type: 'text-transformation',
+        title: { ar: 'تحويل الجمل (مؤنث ← مذكر)', en: 'Sentence Transformation (Feminine → Masculine)' },
+        items: [
+          { id: 1, prompt: 'ذهبت البنت إلى المدرسة', correctAnswer: 'ذهب الولد الى المدرسة' },
+          { id: 2, prompt: 'رتَّبت الفتاة غرفتها', correctAnswer: 'رتب الولد غرفته' },
+          { id: 3, prompt: 'شرحت المعلمة الدرس', correctAnswer: 'شرح المعلم الدرس' },
+          { id: 4, prompt: 'فتحت الأم الباب', correctAnswer: 'فتح الاب الباب' },
+        ],
+      },
+       {
+        id: 'word-transform-singular-to-plural',
+        type: 'text-transformation',
+        title: { ar: 'تحويل المفرد إلى الجمع', en: 'Singular to Plural Conversion' },
+        items: [
+          { id: 1, prompt: 'قلم', correctAnswer: 'أقلام' },
+          { id: 2, prompt: 'بيت', correctAnswer: 'بيوت' },
+          { id: 3, prompt: 'شجرة', correctAnswer: 'أشجار' },
+          { id: 4, prompt: 'جمهور', correctAnswer: 'جماهير' },
+          { id: 5, prompt: 'باب', correctAnswer: 'أبواب' },
+          { id: 6, prompt: 'حيوان', correctAnswer: 'حيوانات' },
+        ],
+      },
+      {
+        id: 'verb-transform-plural-to-singular',
+        type: 'text-transformation',
+        title: { ar: 'تحويل الأفعال (جمع ← مفرد)', en: 'Verb Transformation (Plural → Singular)' },
+        items: [
+            { id: 1, prompt: 'خرجوا', correctAnswer: 'خرج' },
+            { id: 2, prompt: 'ذهبوا', correctAnswer: 'ذهب' },
+            { id: 3, prompt: 'دخلوا', correctAnswer: 'دخل' },
+            { id: 4, prompt: 'أكلوا', correctAnswer: 'أكل' },
+            { id: 5, prompt: 'شربوا', correctAnswer: 'شرب' },
+            { id: 6, prompt: 'لعبوا', correctAnswer: 'لعب' },
+        ]
+      },
+      {
+        id: 'sentence-word-classification-singular-plural',
+        type: 'sentence-word-classification',
+        title: { ar: 'تحديد المفرد والجمع في الجمل', en: 'Identify Singular and Plural in Sentences' },
+        classifications: [
+            { id: 'singular', title: { ar: 'مفرد', en: 'Singular' }, color: 'bg-secondary' },
+            { id: 'plural', title: { ar: 'جمع', en: 'Plural' }, color: 'bg-accent' },
+        ],
+        items: [
+            { id: 1, sentence: [
+                { text: 'خرج', isTarget: false },
+                { text: 'التلاميذ', isTarget: true, correctClassificationId: 'plural' },
+                { text: 'من', isTarget: false },
+                { text: 'المدرسة', isTarget: true, correctClassificationId: 'singular' },
+            ]},
+        ],
+      },
+      {
+        id: 'word-coloring-singular-plural',
+        type: 'word-coloring',
+        title: { ar: 'تلوين المفرد والجمع', en: 'Coloring Singular and Plural' },
+        groups: [
+            { id: 'singular', title: { ar: 'مفرد', en: 'Singular' }, color: 'bg-secondary' },
+            { id: 'plural', title: { ar: 'جمع', en: 'Plural' }, color: 'bg-green-500' },
+        ],
+        items: [
+            { id: 1, word: 'كتب', correctGroupId: 'plural' },
+            { id: 2, word: 'تلميذ', correctGroupId: 'singular' },
+            { id: 3, word: 'حدائق', correctGroupId: 'plural' },
+            { id: 4, word: 'كلب', correctGroupId: 'singular' },
+            { id: 5, word: 'معلمات', correctGroupId: 'plural' },
+            { id: 6, word: 'باب', correctGroupId: 'singular' },
+            { id: 7, word: 'جمهور', correctGroupId: 'plural' },
+            { id: 8, word: 'أقلام', correctGroupId: 'plural' },
+            { id: 9, word: 'معلم', correctGroupId: 'singular' },
+        ],
+      },
+      {
+        id: 'matching-gender-sentences',
+        type: 'matching',
+        title: { ar: 'مطابقة الجمل (تذكير وتأنيث)', en: 'Sentence Matching (Masculine & Feminine)' },
+        pairs: [
+            { id: 'match-1', source: { text: 'الولد يكتب' }, target: { text: 'البنت تكتب' } },
+            { id: 'match-2', source: { text: 'المعلم يشرح' }, target: { text: 'المعلمة تشرح' } },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'phonology-and-guides',
+    title: { ar: 'القسم الثاني: التعليم الصوتي والإرشادات', en: 'Part 2: Phonology and Guides' },
+    exercises: [
+      {
+        id: 'matching-word-picture',
+        type: 'matching',
+        title: { ar: 'مطابقة الكلمات بالصور', en: 'Matching Words with Pictures' },
+        pairs: [
+          // FIX: Added empty text property to satisfy the MatchingPair type.
+          { id: 'wp-1', source: { text: 'باب' }, target: { text: '', emoji: '🚪' } },
+          { id: 'wp-2', source: { text: 'بيت' }, target: { text: '', emoji: '🏠' } },
+          { id: 'wp-3', source: { text: 'مكتب' }, target: { text: '', emoji: '💼' } },
+          { id: 'wp-4', source: { text: 'حمام' }, target: { text: '', emoji: '🛁' } },
+          { id: 'wp-5', source: { text: 'غرفة' }, target: { text: '', emoji: '🛏️' } },
+          { id: 'wp-6', source: { text: 'خزانة' }, target: { text: '', emoji: '🚪' } },
+        ]
+      },
+      {
+        id: 'letter-position',
+        type: 'letter-position',
+        title: { ar: 'تحديد موقع الحرف', en: 'Identifying Letter Position' },
+        items: [
+          { id: 1, word: 'مدرسة', letter: 'م', correctPosition: 'start' },
+          { id: 2, word: 'سماء', letter: 'م', correctPosition: 'middle' },
+          { id: 3, word: 'كريم', letter: 'م', correctPosition: 'end' },
+          { id: 4, word: 'شمس', letter: 'س', correctPosition: 'end' },
+          { id: 5, word: 'سيارة', letter: 'س', correctPosition: 'start' },
+          { id: 6, word: 'عصير', letter: 'س', correctPosition: 'middle' },
+          { id: 7, word: 'جرس', letter: 'ج', correctPosition: 'start' },
+          { id: 8, word: 'فهد', letter: 'ف', correctPosition: 'start' },
+        ],
+      },
+      {
+        id: 'matching-animal-sound',
+        type: 'matching',
+        title: { ar: 'تصنيف أصوات الحيوانات', en: 'Classifying Animal Sounds' },
+        pairs: [
+          { id: 'as-1', source: { emoji: '🐈', text: 'قطة' }, target: { text: 'مواء' } },
+          { id: 'as-2', source: { emoji: '🐎', text: 'حصان' }, target: { text: 'صهيل' } },
+          { id: 'as-3', source: { emoji: '🦁', text: 'أسد' }, target: { text: 'زئير' } },
+          { id: 'as-4', source: { emoji: '🐕', text: 'كلب' }, target: { text: 'نباح' } },
+        ]
+      },
+      {
+        id: 'reading-practice',
+        type: 'reading',
+        title: { ar: 'القراءة وتكوين الجمل', en: 'Reading and Sentence Formation' },
+        items: [
+          { id: 1, text: 'تفاحة', emoji: '🍎' },
+          { id: 2, text: 'خوخ', emoji: '🍑' },
+          { id: 3, text: 'أحمد يلعب الكرة', emoji: '👦⚽️' },
+          { id: 4, text: 'خديجة تقطف الأزهار', emoji: '👧🌸' },
+        ]
+      },
+      {
+        id: 'timed-challenge-sh',
+        type: 'timed-challenge',
+        title: { ar: 'نشاط إملاء جماعي', en: 'Group Dictation Activity' },
+        prompt: { ar: 'اكتب أكبر عدد من الكلمات التي تبدأ بحرف', en: 'Write as many words as you can that start with the letter' },
+        letter: 'ش',
+        duration: 60,
+      },
+      {
+        id: 'pronunciation-guide',
+        type: 'instructional-text',
+        title: { ar: 'دليل النطق (للمدرب/ولي الأمر)', en: 'Pronunciation Guide (for Coach/Parent)' },
+        content: {
+            ar: [
+                { title: 'تعليمات النطق (الحروف السهلة)', points: ['م: أضم الشفتين.', 'ب: فتح على الشمعة (نَفْخ).', 'ف: نضع اليد على الذقن لنشعر بالاهتزاز.', 'ت: نضع اليد أمام الفم لنحس بالهواء الخارج.', 'ل: تحريك اللسان بلمس سقف فمك.'] },
+                { title: 'تعليمات النطق (الحروف الصعبة)', points: ['س: وضع ورقة خفيفة أمامه لتحريكها بالهواء.', 'ش: يضع يده أمام فمه ليحس بدفع الهواء.', 'ر: تقليد صوت دجاجة أو صهيل.'] },
+            ],
+            en: [
+                { title: 'Pronunciation Instructions (Easy Letters)', points: ['M: Close the lips.', 'B: Like blowing out a candle.', 'F: Place hand on chin to feel the vibration.', 'T: Place hand in front of mouth to feel the air.', 'L: Touch the roof of the mouth with the tongue.'] },
+                { title: 'Pronunciation Instructions (Difficult Letters)', points: ['S: Place a light paper in front of the mouth and make it move with the "S" sound.', 'SH: Place hand in front of the mouth to feel the air push.', 'R: Imitate the sound of a chicken or a horse neigh.'] },
+            ],
+        },
+        notes: {
+            ar: ['استخدام المرآة في جميع الأنشطة.', 'البدء بـ 3-4 حروف فقط في كل أسبوع.', 'التدريب على المدود والحركات بعد إتقان نطق الحروف.'],
+            en: ['Use a mirror in all activities.', 'Start with only 3-4 letters per week.', 'Vowel and diacritic exercises will be covered after mastering the letters.']
+        }
+      },
+    ]
+  }
+];

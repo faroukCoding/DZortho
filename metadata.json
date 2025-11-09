@@ -1,0 +1,7 @@
+{
+  "name": "Speech Therapy Platform",
+  "description": "An interactive web application designed for speech therapy patients in Algeria. It provides exercises for patients and dashboards for therapists and parents to track progress and manage activities.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
