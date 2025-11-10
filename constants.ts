@@ -1,7 +1,7 @@
 import { ExerciseSection } from './types';
 export const LOGO_URL = '/images/1000009626.jpg';
+export const WELCOME_IMAGE_URL = '/images/1000009812.jpg';
 
-export const WELCOME_IMAGE_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/3565f42c-2321-4d32-8419-35c6b92f75a0/learning-companion-welcome.png';
 
 export const WILAYAS = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra",
