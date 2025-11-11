@@ -159,6 +159,64 @@ export interface InstructionalText {
     notes?: { ar: string[]; en: string[]; };
 }
 
+// --- Writing Stage Exercise Types ---
+export interface FreeDrawExercise {
+    id: string;
+    type: 'free-draw';
+    title: { ar: string; en: string; };
+    prompt: { ar: string; en: string; };
+}
+
+export interface AuditoryLetterSelectionItem {
+    id: number;
+    targetLetter: string;
+    options: string[];
+}
+export interface AuditoryLetterSelectionExercise {
+    id: string;
+    type: 'auditory-letter-selection';
+    title: { ar: string; en: string; };
+    items: AuditoryLetterSelectionItem[];
+}
+
+export interface SentenceUnscrambleItem {
+    id: number;
+    scrambled: string[];
+    correct: string;
+}
+export interface SentenceUnscrambleExercise {
+    id: string;
+    type: 'sentence-unscramble';
+    title: { ar: string; en: string; };
+    items: SentenceUnscrambleItem[];
+}
+
+export interface SentenceCompletionItem {
+    id: number;
+    promptStart: string;
+    promptEnd?: string;
+    emoji: string;
+    correctWord: string;
+}
+export interface SentenceCompletionExercise {
+    id: string;
+    type: 'sentence-completion';
+    title: { ar: string; en: string; };
+    items: SentenceCompletionItem[];
+}
+
+export interface ImageWordAssociationItem {
+    id: number;
+    emoji: string;
+    correctAnswer: string;
+}
+export interface ImageWordAssociationExercise {
+    id: string;
+    type: 'image-word-association';
+    title: { ar: string; en: string; };
+    items: ImageWordAssociationItem[];
+}
+
 
 // --- Union Type for All Exercises ---
 
@@ -172,7 +230,12 @@ export type AnyExercise =
     | MatchingExercise
     | SentenceWordClassificationExercise
     | TimedChallengeExercise
-    | InstructionalText;
+    | InstructionalText
+    | FreeDrawExercise
+    | AuditoryLetterSelectionExercise
+    | SentenceUnscrambleExercise
+    | SentenceCompletionExercise
+    | ImageWordAssociationExercise;
 
 export interface ExerciseSection {
     id: string;

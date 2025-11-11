@@ -1,7 +1,7 @@
 import { ExerciseSection } from './types';
 
-export const LOGO_URL = '/images/1000009626.jpg';
-export const WELCOME_IMAGE_URL = '/images/1000009812.jpg';
+export const LOGO_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/f80998a6-1070-4d54-8e43-8f0a0c476839/ortholink.png';
+export const WELCOME_IMAGE_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/3565f42c-2321-4d32-8419-35c6b92f75a0/learning-companion-welcome.png';
 
 export const WILAYAS = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra",
@@ -115,93 +115,11 @@ export const TEXTS = {
   },
 };
 
+
 export const EXERCISE_SECTIONS: ExerciseSection[] = [
   {
-    id: 'phonology-and-guides',
-    title: { ar: 'القسم الأول: التعليم الصوتي والإرشادات', en: 'Part 1: Phonology and Guides' },
-    exercises: [
-      {
-        id: 'matching-word-picture',
-        type: 'matching',
-        title: { ar: 'مطابقة الكلمات بالصور', en: 'Matching Words with Pictures' },
-        pairs: [
-          { id: 'wp-1', source: { text: 'باب' }, target: { text: '', emoji: '🚪' } },
-          { id: 'wp-2', source: { text: 'بيت' }, target: { text: '', emoji: '🏠' } },
-          { id: 'wp-3', source: { text: 'مكتب' }, target: { text: '', emoji: '💼' } },
-          { id: 'wp-4', source: { text: 'حمام' }, target: { text: '', emoji: '🛁' } },
-          { id: 'wp-5', source: { text: 'غرفة' }, target: { text: '', emoji: '🛏️' } },
-          { id: 'wp-6', source: { text: 'خزانة' }, target: { text: '', emoji: '🚪' } },
-        ]
-      },
-      {
-        id: 'letter-position',
-        type: 'letter-position',
-        title: { ar: 'تحديد موقع الحرف', en: 'Identifying Letter Position' },
-        items: [
-          { id: 1, word: 'مدرسة', letter: 'م', correctPosition: 'start' },
-          { id: 2, word: 'سماء', letter: 'م', correctPosition: 'middle' },
-          { id: 3, word: 'كريم', letter: 'م', correctPosition: 'end' },
-          { id: 4, word: 'شمس', letter: 'س', correctPosition: 'end' },
-          { id: 5, word: 'سيارة', letter: 'س', correctPosition: 'start' },
-          { id: 6, word: 'عصير', letter: 'س', correctPosition: 'middle' },
-          { id: 7, word: 'جرس', letter: 'ج', correctPosition: 'start' },
-          { id: 8, word: 'فهد', letter: 'ف', correctPosition: 'start' },
-        ],
-      },
-      {
-        id: 'matching-animal-sound',
-        type: 'matching',
-        title: { ar: 'تصنيف أصوات الحيوانات', en: 'Classifying Animal Sounds' },
-        pairs: [
-          { id: 'as-1', source: { emoji: '🐈', text: 'قطة' }, target: { text: 'مواء' } },
-          { id: 'as-2', source: { emoji: '🐎', text: 'حصان' }, target: { text: 'صهيل' } },
-          { id: 'as-3', source: { emoji: '🦁', text: 'أسد' }, target: { text: 'زئير' } },
-          { id: 'as-4', source: { emoji: '🐕', text: 'كلب' }, target: { text: 'نباح' } },
-        ]
-      },
-      {
-        id: 'reading-practice',
-        type: 'reading',
-        title: { ar: 'القراءة وتكوين الجمل', en: 'Reading and Sentence Formation' },
-        items: [
-          { id: 1, text: 'تفاحة', emoji: '🍎' },
-          { id: 2, text: 'خوخ', emoji: '🍑' },
-          { id: 3, text: 'أحمد يلعب الكرة', emoji: '👦⚽️' },
-          { id: 4, text: 'خديجة تقطف الأزهار', emoji: '👧🌸' },
-        ]
-      },
-      {
-        id: 'timed-challenge-sh',
-        type: 'timed-challenge',
-        title: { ar: 'نشاط إملاء جماعي', en: 'Group Dictation Activity' },
-        prompt: { ar: 'اكتب أكبر عدد من الكلمات التي تبدأ بحرف', en: 'Write as many words as you can that start with the letter' },
-        letter: 'ش',
-        duration: 60,
-      },
-      {
-        id: 'pronunciation-guide',
-        type: 'instructional-text',
-        title: { ar: 'دليل النطق (للمدرب/ولي الأمر)', en: 'Pronunciation Guide (for Coach/Parent)' },
-        content: {
-            ar: [
-                { title: 'تعليمات النطق (الحروف السهلة)', points: ['م: أضم الشفتين.', 'ب: فتح على الشمعة (نَفْخ).', 'ف: نضع اليد على الذقن لنشعر بالاهتزاز.', 'ت: نضع اليد أمام الفم لنحس بالهواء الخارج.', 'ل: تحريك اللسان بلمس سقف فمك.'] },
-                { title: 'تعليمات النطق (الحروف الصعبة)', points: ['س: وضع ورقة خفيفة أمامه لتحريكها بالهواء.', 'ش: يضع يده أمام فمه ليحس بدفع الهواء.', 'ر: تقليد صوت دجاجة أو صهيل.'] },
-            ],
-            en: [
-                { title: 'Pronunciation Instructions (Easy Letters)', points: ['M: Close the lips.', 'B: Like blowing out a candle.', 'F: Place hand on chin to feel the vibration.', 'T: Place hand in front of mouth to feel the air.', 'L: Touch the roof of the mouth with the tongue.'] },
-                { title: 'Pronunciation Instructions (Difficult Letters)', points: ['S: Place a light paper in front of the mouth and make it move with the "S" sound.', 'SH: Place hand in front of the mouth to feel the air push.', 'R: Imitate the sound of a chicken or a horse neigh.'] },
-            ],
-        },
-        notes: {
-            ar: ['استخدام المرآة في جميع الأنشطة.', 'البدء بـ 3-4 حروف فقط في كل أسبوع.', 'التدريب على المدود والحركات بعد إتقان نطق الحروف.'],
-            en: ['Use a mirror in all activities.', 'Start with only 3-4 letters per week.', 'Vowel and diacritic exercises will be covered after mastering the letters.']
-        }
-      },
-    ]
-  },
-  {
     id: 'grammar-morphology',
-    title: { ar: 'القسم الثاني: تمارين النحو والصرف', en: 'Part 2: Grammar and Morphology Exercises' },
+    title: { ar: 'القسم الأول: تمارين النحو والصرف', en: 'Part 1: Grammar and Morphology Exercises' },
     exercises: [
       {
         id: 'drag-drop-gender-classification',
@@ -321,6 +239,183 @@ export const EXERCISE_SECTIONS: ExerciseSection[] = [
             { id: 'match-1', source: { text: 'الولد يكتب' }, target: { text: 'البنت تكتب' } },
             { id: 'match-2', source: { text: 'المعلم يشرح' }, target: { text: 'المعلمة تشرح' } },
         ]
+      },
+    ]
+  },
+  {
+    id: 'writing-stage',
+    title: { ar: 'القسم الثاني: مرحلة الكتابة', en: 'Part 2: Writing Stage' },
+    exercises: [
+      {
+        id: 'pre-writing-draw-lines',
+        type: 'free-draw',
+        title: { ar: 'رسم أشكال وخطوط', en: 'Drawing Shapes and Lines' },
+        prompt: { ar: 'استخدم المساحة أدناه لرسم الخطوط والأشكال التالية بحرية: L, T, X, O, S, Z, A, ~, C, ☐', en: 'Use the space below to freely draw the following lines and shapes: L, T, X, O, S, Z, A, ~, C, ☐' }
+      },
+      {
+        id: 'auditory-coloring',
+        type: 'auditory-letter-selection',
+        title: { ar: 'تلوين الحرف المسموع', en: 'Coloring the Heard Letter' },
+        items: [
+          { id: 1, targetLetter: 'ق', options: ['ق', 'أ', 'ب'] },
+          { id: 2, targetLetter: 'ش', options: ['خ', 'م', 'ش'] },
+          { id: 3, targetLetter: 'ر', options: ['ل', 'ف', 'ر'] },
+        ]
+      },
+      {
+        id: 'vowel-recognition-guide',
+        type: 'instructional-text',
+        title: { ar: 'التعرف على الحركات القصيرة', en: 'Recognizing Short Vowels' },
+        content: {
+            ar: [
+                { title: 'اربط الحركة بشكل الفم', points: ['الفتحة (ـَ): افتح فمك.', 'الضمة (ـُ): ضم شفتيك كأنك تنفخ بالونًا.', 'الكسرة (ـِ): ابتسم، اسحب شفتيك للأسفل قليلاً.'] },
+            ],
+            en: [
+                { title: 'Connect the Vowel to the Mouth Shape', points: ['Fatha (ـَ): Open your mouth.', 'Damma (ـُ): Round your lips like you are blowing a balloon.', 'Kasra (ـِ): Smile, pulling your lips slightly down.'] },
+            ],
+        },
+      },
+      {
+        id: 'match-letter-to-word',
+        type: 'matching',
+        title: { ar: 'ربط الحرف بالكلمة', en: 'Connect the Letter to the Word' },
+        pairs: [
+          { id: 'lw-1', source: { text: 'أ' }, target: { text: 'أرنب' } },
+          { id: 'lw-2', source: { text: 'ن' }, target: { text: 'نحلة' } },
+          { id: 'lw-3', source: { text: 'ب' }, target: { text: 'بطة' } },
+          { id: 'lw-4', source: { text: 'ج' }, target: { text: 'جمل' } },
+        ]
+      },
+      {
+        id: 'unscramble-sentences',
+        type: 'sentence-unscramble',
+        title: { ar: 'نشاط تكوين الجمل القصيرة', en: 'Short Sentence Formation Activity' },
+        items: [
+          { id: 1, scrambled: ['الدرس', 'الولد', 'كتب'], correct: 'كتب الولد الدرس' },
+          { id: 2, scrambled: ['البنت', 'الفستان', 'لبست'], correct: 'لبست البنت الفستان' },
+          { id: 3, scrambled: ['شرحت', 'الدرس', 'الأستاذة'], correct: 'شرحت الأستاذة الدرس' },
+        ]
+      },
+      {
+        id: 'complete-sentence-with-image',
+        type: 'sentence-completion',
+        title: { ar: 'نشاط إكمال الجملة', en: 'Sentence Completion Activity' },
+        items: [
+            { id: 1, promptStart: 'أب يأكل', emoji: '🍎', correctWord: 'تفاحة' },
+            { id: 2, promptStart: 'قرأ الولد', emoji: '📖', correctWord: 'كتابا' },
+            { id: 3, promptStart: 'طبخت البنت', emoji: '🍲', correctWord: 'حساء' },
+        ]
+      },
+      {
+        id: 'role-playing-guide',
+        type: 'instructional-text',
+        title: { ar: 'لعب أدوار واستجوابات', en: 'Role-playing and Questions' },
+        content: {
+            ar: [
+                { title: 'لعب الأدوار', points: ['اطلب من الطفل أن يلعب دور معلم يشرح درساً، أو فلاح يزرع أرضه.', 'شجعه على استخدام الحركات والصوت لتقليد الشخصية.'] },
+                { title: 'الاستجواب (أسئلة شفهية)', points: ['بعد لعب الدور، اسأله: ماذا أحسست وأنت فلاح؟ ولماذا؟', 'بعد سماع قصة، اسأله: حول ماذا تدور القصة؟'] },
+            ],
+            en: [
+                { title: 'Role-Playing', points: ['Ask the child to play the role of a teacher explaining a lesson, or a farmer planting his land.', 'Encourage them to use movements and their voice to imitate the character.'] },
+                { title: 'Questioning (Oral questions)', points: ['After role-playing, ask them: How did you feel as a farmer? And why?', 'After hearing a story, ask: What is the story about?'] },
+            ],
+        },
+      },
+      {
+        id: 'image-word-recall',
+        type: 'image-word-association',
+        title: { ar: 'استدعاء الكلمة من الصورة', en: 'Word Recall from Image' },
+        items: [
+            { id: 1, emoji: '☀️', correctAnswer: 'شمس' },
+            { id: 2, emoji: '🐦', correctAnswer: 'طائر' },
+            { id: 3, emoji: '🌸', correctAnswer: 'زهرة' },
+            { id: 4, emoji: '⚽️', correctAnswer: 'كرة' },
+            { id: 5, emoji: '🍇', correctAnswer: 'عنب' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'phonology-and-guides',
+    title: { ar: 'القسم الثالث: التعليم الصوتي والإرشادات', en: 'Part 3: Phonology and Guides' },
+    exercises: [
+      {
+        id: 'matching-word-picture',
+        type: 'matching',
+        title: { ar: 'مطابقة الكلمات بالصور', en: 'Matching Words with Pictures' },
+        pairs: [
+          // FIX: Added empty text property to satisfy the MatchingPair type.
+          { id: 'wp-1', source: { text: 'باب' }, target: { text: '', emoji: '🚪' } },
+          { id: 'wp-2', source: { text: 'بيت' }, target: { text: '', emoji: '🏠' } },
+          { id: 'wp-3', source: { text: 'مكتب' }, target: { text: '', emoji: '💼' } },
+          { id: 'wp-4', source: { text: 'حمام' }, target: { text: '', emoji: '🛁' } },
+          { id: 'wp-5', source: { text: 'غرفة' }, target: { text: '', emoji: '🛏️' } },
+          { id: 'wp-6', source: { text: 'خزانة' }, target: { text: '', emoji: '🚪' } },
+        ]
+      },
+      {
+        id: 'letter-position',
+        type: 'letter-position',
+        title: { ar: 'تحديد موقع الحرف', en: 'Identifying Letter Position' },
+        items: [
+          { id: 1, word: 'مدرسة', letter: 'م', correctPosition: 'start' },
+          { id: 2, word: 'سماء', letter: 'م', correctPosition: 'middle' },
+          { id: 3, word: 'كريم', letter: 'م', correctPosition: 'end' },
+          { id: 4, word: 'شمس', letter: 'س', correctPosition: 'end' },
+          { id: 5, word: 'سيارة', letter: 'س', correctPosition: 'start' },
+          { id: 6, word: 'عصير', letter: 'س', correctPosition: 'middle' },
+          { id: 7, word: 'جرس', letter: 'ج', correctPosition: 'start' },
+          { id: 8, word: 'فهد', letter: 'ف', correctPosition: 'start' },
+        ],
+      },
+      {
+        id: 'matching-animal-sound',
+        type: 'matching',
+        title: { ar: 'تصنيف أصوات الحيوانات', en: 'Classifying Animal Sounds' },
+        pairs: [
+          { id: 'as-1', source: { emoji: '🐈', text: 'قطة' }, target: { text: 'مواء' } },
+          { id: 'as-2', source: { emoji: '🐎', text: 'حصان' }, target: { text: 'صهيل' } },
+          { id: 'as-3', source: { emoji: '🦁', text: 'أسد' }, target: { text: 'زئير' } },
+          { id: 'as-4', source: { emoji: '🐕', text: 'كلب' }, target: { text: 'نباح' } },
+        ]
+      },
+      {
+        id: 'reading-practice',
+        type: 'reading',
+        title: { ar: 'القراءة وتكوين الجمل', en: 'Reading and Sentence Formation' },
+        items: [
+          { id: 1, text: 'تفاحة', emoji: '🍎' },
+          { id: 2, text: 'خوخ', emoji: '🍑' },
+          { id: 3, text: 'أحمد يلعب الكرة', emoji: '👦⚽️' },
+          { id: 4, text: 'خديجة تقطف الأزهار', emoji: '👧🌸' },
+        ]
+      },
+      {
+        id: 'timed-challenge-sh',
+        type: 'timed-challenge',
+        title: { ar: 'نشاط إملاء جماعي', en: 'Group Dictation Activity' },
+        prompt: { ar: 'اكتب أكبر عدد من الكلمات التي تبدأ بحرف', en: 'Write as many words as you can that start with the letter' },
+        letter: 'ش',
+        duration: 60,
+      },
+      {
+        id: 'pronunciation-guide',
+        type: 'instructional-text',
+        title: { ar: 'دليل النطق (للمدرب/ولي الأمر)', en: 'Pronunciation Guide (for Coach/Parent)' },
+        content: {
+            ar: [
+                { title: 'تعليمات النطق (الحروف السهلة)', points: ['م: أضم الشفتين.', 'ب: فتح على الشمعة (نَفْخ).', 'ف: نضع اليد على الذقن لنشعر بالاهتزاز.', 'ت: نضع اليد أمام الفم لنحس بالهواء الخارج.', 'ل: تحريك اللسان بلمس سقف فمك.'] },
+                { title: 'تعليمات النطق (الحروف الصعبة)', points: ['س: وضع ورقة خفيفة أمامه لتحريكها بالهواء.', 'ش: يضع يده أمام فمه ليحس بدفع الهواء.', 'ر: تقليد صوت دجاجة أو صهيل.'] },
+            ],
+            en: [
+                { title: 'Pronunciation Instructions (Easy Letters)', points: ['M: Close the lips.', 'B: Like blowing out a candle.', 'F: Place hand on chin to feel the vibration.', 'T: Place hand in front of mouth to feel the air.', 'L: Touch the roof of the mouth with the tongue.'] },
+                { title: 'Pronunciation Instructions (Difficult Letters)', points: ['S: Place a light paper in front of the mouth and make it move with the "S" sound.', 'SH: Place hand in front of the mouth to feel the air push.', 'R: Imitate the sound of a chicken or a horse neigh.'] },
+            ],
+        },
+        notes: {
+            ar: ['استخدام المرآة في جميع الأنشطة.', 'البدء بـ 3-4 حروف فقط في كل أسبوع.', 'التدريب على المدود والحركات بعد إتقان نطق الحروف.'],
+            en: ['Use a mirror in all activities.', 'Start with only 3-4 letters per week.', 'Vowel and diacritic exercises will be covered after mastering the letters.']
+        }
       },
     ]
   }

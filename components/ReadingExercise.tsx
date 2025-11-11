@@ -19,6 +19,12 @@ import {
     TimedChallengeExercise,
     InstructionalText,
     ExerciseSection,
+    FreeDrawExercise,
+    AuditoryLetterSelectionExercise,
+    AuditoryLetterSelectionItem,
+    SentenceUnscrambleExercise,
+    SentenceCompletionExercise,
+    ImageWordAssociationExercise,
 } from '../types';
 import { TEXTS, EXERCISE_SECTIONS } from '../constants';
 
@@ -42,6 +48,20 @@ const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
         ></div>
     </div>
 );
+
+const SortableItem: React.FC<{id: string, children: React.ReactNode}> = ({ id, children }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+            {children}
+        </div>
+    );
+};
 
 
 // --- Exercise Card Components ---
@@ -535,6 +555,317 @@ const InstructionalTextCard: React.FC<{ exercise: InstructionalText; language: L
     );
 };
 
+// --- New Writing Stage Cards ---
+
+const FreeDrawCard: React.FC<{ exercise: FreeDrawExercise; language: Language; onCorrect: () => void }> = ({ exercise, language, onCorrect }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const contextRef = useRef<CanvasRenderingContext2D | null>(null);
+    const [isDrawing, setIsDrawing] = useState(false);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        canvas.width = canvas.offsetWidth;
+        canvas.height = 300; // fixed height
+        const context = canvas.getContext("2d");
+        if(context){
+            context.lineCap = "round";
+            context.strokeStyle = "black";
+            context.lineWidth = 5;
+            contextRef.current = context;
+        }
+    }, []);
+    
+    useEffect(() => {
+      // This is a practice exercise, mark as complete on mount.
+      onCorrect();
+    }, [onCorrect]);
+
+    const getCoords = (event: MouseEvent | Touch) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return { offsetX: 0, offsetY: 0 };
+        if (event instanceof MouseEvent) {
+            return { offsetX: event.offsetX, offsetY: event.offsetY };
+        }
+        const rect = canvas.getBoundingClientRect();
+        return {
+            offsetX: event.clientX - rect.left,
+            offsetY: event.clientY - rect.top,
+        };
+    };
+
+    const startDrawing = (event: React.MouseEvent | React.TouchEvent) => {
+        const { offsetX, offsetY } = getCoords('touches' in event ? event.touches[0] : event.nativeEvent);
+        contextRef.current?.beginPath();
+        contextRef.current?.moveTo(offsetX, offsetY);
+        setIsDrawing(true);
+        event.preventDefault();
+    };
+
+    const finishDrawing = (event: React.MouseEvent | React.TouchEvent) => {
+        contextRef.current?.closePath();
+        setIsDrawing(false);
+        event.preventDefault();
+    };
+
+    const draw = (event: React.MouseEvent | React.TouchEvent) => {
+        if (!isDrawing) return;
+        const { offsetX, offsetY } = getCoords('touches' in event ? event.touches[0] : event.nativeEvent);
+        contextRef.current?.lineTo(offsetX, offsetY);
+        contextRef.current?.stroke();
+        event.preventDefault();
+    };
+    
+    const clearCanvas = () => {
+        const canvas = canvasRef.current;
+        const context = contextRef.current;
+        if(canvas && context){
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    };
+
+    return (
+        <div className="space-y-4 text-center">
+            <p className="text-lg">{exercise.prompt[language]}</p>
+            <canvas
+                ref={canvasRef}
+                onMouseDown={startDrawing}
+                onMouseUp={finishDrawing}
+                onMouseMove={draw}
+                onMouseLeave={finishDrawing}
+                onTouchStart={startDrawing}
+                onTouchEnd={finishDrawing}
+                onTouchMove={draw}
+                className="bg-white border-2 border-dashed border-gray-400 rounded-lg w-full touch-none"
+            />
+            <button onClick={clearCanvas} className="px-4 py-2 bg-secondary text-white rounded-lg">Clear</button>
+        </div>
+    );
+};
+
+const AuditoryLetterSelectionCard: React.FC<{ exercise: AuditoryLetterSelectionExercise; language: Language; onCorrect: () => void }> = ({ exercise, language, onCorrect }) => {
+    const texts = TEXTS[language];
+    const [results, setResults] = useState<{[key: number]: boolean}>({});
+
+    const handleListen = (text: string) => {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ar-SA';
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+    };
+
+    const handleSelect = (item: AuditoryLetterSelectionItem, selectedOption: string) => {
+        if (results[item.id]) return; // Already answered
+
+        if (selectedOption === item.targetLetter) {
+            setResults(prev => ({ ...prev, [item.id]: true }));
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            onCorrect();
+        }
+    };
+
+    return (
+        <div className="space-y-4">
+            {exercise.items.map(item => (
+                <div key={item.id} className="p-4 border rounded-lg bg-yellow-50 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <button onClick={() => handleListen(item.targetLetter)} className="px-4 py-2 bg-primary text-white rounded-md hover:bg-green-600 transition-colors font-semibold flex items-center gap-2">
+                        {texts.listen} <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.858 8.464a5 5 0 000 7.072m2.828 9.9a9 9 0 000-12.728M12 15a3 3 0 100-6 3 3 0 000 6z" /></svg>
+                    </button>
+                    <div className="flex gap-2">
+                        {item.options.map(option => (
+                            <button
+                                key={option}
+                                onClick={() => handleSelect(item, option)}
+                                disabled={!!results[item.id]}
+                                className={`w-16 h-16 text-2xl font-bold rounded-lg border-2 transition-colors ${
+                                    results[item.id] && item.targetLetter === option ? 'bg-green-500 border-green-700 text-white' : 'bg-white hover:bg-yellow-100 border-gray-300 disabled:bg-gray-200'
+                                }`}
+                            >
+                                {option}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const SentenceUnscrambleCard: React.FC<{ exercise: SentenceUnscrambleExercise; language: Language; onCorrect: () => void }> = ({ exercise, language, onCorrect }) => {
+    const texts = TEXTS[language];
+    const [itemsState, setItemsState] = useState(
+        exercise.items.map(item => ({
+            ...item,
+            currentOrder: item.scrambled,
+            typedAnswer: '',
+            isCorrect: null as boolean | null
+        }))
+    );
+    const sensors = useSensors(useSensor(PointerSensor));
+
+    const handleDragEnd = (event: DragEndEvent, index: number) => {
+        const { active, over } = event;
+        if (over && active.id !== over.id) {
+            setItemsState(prev => {
+                const newItems = [...prev];
+                const oldIndex = newItems[index].currentOrder.indexOf(active.id as string);
+                const newIndex = newItems[index].currentOrder.indexOf(over.id as string);
+                newItems[index].currentOrder = arrayMove(newItems[index].currentOrder, oldIndex, newIndex);
+                return newItems;
+            });
+        }
+    };
+    
+    const handleCheck = (index: number) => {
+        setItemsState(prev => {
+            const newItems = [...prev];
+            const correct = newItems[index].typedAnswer.trim() === newItems[index].correct.trim();
+            newItems[index].isCorrect = correct;
+            if (correct) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                onCorrect();
+            }
+            return newItems;
+        });
+    };
+    
+    const handleInputChange = (index: number, value: string) => {
+        setItemsState(prev => {
+            const newItems = [...prev];
+            newItems[index].typedAnswer = value;
+            return newItems;
+        });
+    };
+
+    return (
+        <div className="space-y-6">
+            {itemsState.map((item, index) => (
+                <div key={item.id} className="p-4 border rounded-lg bg-yellow-50 shadow-sm space-y-4">
+                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, index)}>
+                        <SortableContext items={item.currentOrder} strategy={verticalListSortingStrategy}>
+                            <div className="flex flex-wrap gap-2 justify-center" dir="rtl">
+                                {item.currentOrder.map(word => (
+                                    <SortableItem key={word} id={word}>
+                                        <div className="px-4 py-2 bg-accent text-dark rounded-full shadow-md cursor-grab active:cursor-grabbing">
+                                            {word}
+                                        </div>
+                                    </SortableItem>
+                                ))}
+                            </div>
+                        </SortableContext>
+                    </DndContext>
+                    <div className="flex gap-2 items-center">
+                         <input
+                            type="text"
+                            value={item.typedAnswer}
+                            onChange={(e) => handleInputChange(index, e.target.value)}
+                            className={`flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                                item.isCorrect === true ? 'border-green-500 ring-green-300' : 
+                                item.isCorrect === false ? 'border-red-500 ring-red-300' : 'border-gray-300 focus:ring-secondary'
+                            }`}
+                            dir="rtl"
+                         />
+                         <button onClick={() => handleCheck(index)} disabled={item.isCorrect === true} className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-600 disabled:bg-gray-400">
+                             {texts.checkAnswer}
+                         </button>
+                    </div>
+                     {item.isCorrect === false && <p className="text-red-500">{texts.tryAgain}</p>}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const SentenceCompletionCard: React.FC<{ exercise: SentenceCompletionExercise; language: Language; onCorrect: () => void }> = ({ exercise, language, onCorrect }) => {
+    const texts = TEXTS[language];
+    const [answers, setAnswers] = useState<{[key: number]: string}>({});
+    const [results, setResults] = useState<{[key: number]: boolean | null}>({});
+
+    const handleCheck = (id: number) => {
+        const item = exercise.items.find(i => i.id === id);
+        if (!item) return;
+        const isCorrect = answers[id]?.trim() === item.correctWord.trim();
+        setResults(prev => ({ ...prev, [id]: isCorrect }));
+        if (isCorrect) {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            onCorrect();
+        }
+    };
+
+    return (
+        <div className="space-y-4">
+            {exercise.items.map(item => (
+                <div key={item.id} className="p-4 border rounded-lg bg-yellow-50 shadow-sm space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-lg font-semibold text-dark">
+                        <span>{item.promptStart}</span>
+                        <span className="text-4xl">{item.emoji}</span>
+                        {item.promptEnd && <span>{item.promptEnd}</span>}
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <input
+                            type="text"
+                            value={answers[item.id] || ''}
+                            onChange={(e) => setAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                            className={`flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                                results[item.id] === true ? 'border-green-500 ring-green-300' : 
+                                results[item.id] === false ? 'border-red-500 ring-red-300' : 'border-gray-300 focus:ring-secondary'
+                            }`}
+                        />
+                        <button onClick={() => handleCheck(item.id)} disabled={results[item.id] === true} className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-600 disabled:bg-gray-400">
+                            {texts.checkAnswer}
+                        </button>
+                    </div>
+                     {results[item.id] === false && <p className="text-red-500">{texts.tryAgain}</p>}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const ImageWordAssociationCard: React.FC<{ exercise: ImageWordAssociationExercise; language: Language; onCorrect: () => void }> = ({ exercise, language, onCorrect }) => {
+    const texts = TEXTS[language];
+    const [answers, setAnswers] = useState<{[key: number]: string}>({});
+    const [results, setResults] = useState<{[key: number]: boolean | null}>({});
+
+    const handleCheck = (id: number) => {
+        const item = exercise.items.find(i => i.id === id);
+        if(!item) return;
+        const isCorrect = answers[id]?.trim() === item.correctAnswer.trim();
+        setResults(prev => ({ ...prev, [id]: isCorrect }));
+        if (isCorrect) {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            onCorrect();
+        }
+    };
+
+    return (
+        <div className="space-y-4">
+            {exercise.items.map(item => (
+                <div key={item.id} className="p-4 border rounded-lg bg-yellow-50 shadow-sm space-y-2">
+                    <p className="font-semibold text-5xl text-dark text-center">{item.emoji}</p>
+                    <div className="flex gap-2 items-center">
+                        <input
+                            type="text"
+                            value={answers[item.id] || ''}
+                            onChange={(e) => setAnswers(prev => ({ ...prev, [item.id]: e.target.value }))}
+                            className={`flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                                results[item.id] === true ? 'border-green-500 ring-green-300' : 
+                                results[item.id] === false ? 'border-red-500 ring-red-300' : 'border-gray-300 focus:ring-secondary'
+                            }`}
+                        />
+                        <button onClick={() => handleCheck(item.id)} disabled={results[item.id] === true} className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-600 disabled:bg-gray-400">
+                            {texts.checkAnswer}
+                        </button>
+                    </div>
+                     {results[item.id] === false && <p className="text-red-500">{texts.tryAgain}</p>}
+                </div>
+            ))}
+        </div>
+    );
+};
+
 
 // --- Main Exercises Component ---
 
@@ -579,6 +910,11 @@ const Exercises: React.FC<{ language: Language }> = ({ language }) => {
                 {exercise.type === 'sentence-word-classification' && <SentenceWordClassificationCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
                 {exercise.type === 'timed-challenge' && <TimedChallengeCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
                 {exercise.type === 'instructional-text' && <InstructionalTextCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
+                {exercise.type === 'free-draw' && <FreeDrawCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
+                {exercise.type === 'auditory-letter-selection' && <AuditoryLetterSelectionCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
+                {exercise.type === 'sentence-unscramble' && <SentenceUnscrambleCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
+                {exercise.type === 'sentence-completion' && <SentenceCompletionCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
+                {exercise.type === 'image-word-association' && <ImageWordAssociationCard exercise={exercise} language={language} onCorrect={() => handleCorrect(exercise.id)} />}
               </div>
             ))}
           </div>

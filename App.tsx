@@ -203,7 +203,7 @@ const App: React.FC = () => {
             <p className="text-gray-600 text-lg">{user.role === 'therapist' ? texts.therapistDashboard : texts.parentDashboard}</p>
         </div>
         
-        <h2 className="text-3xl font-bold text-dark text-center mb-4">{texts.readingStage}</h2>
+        <h2 className="text-3xl font-bold text-dark text-center mb-4">{texts.viewExercises}</h2>
         <Exercises language={language} />
       </main>
 
