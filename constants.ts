@@ -119,7 +119,7 @@ export const TEXTS = {
 
 // === مرحلة القراءة ===
 export const READING_SECTIONS: ExerciseSection[] = [
-  // القسم الأول: التعليم الصوتي والإرشادات (أصبح الأول)
+  // القسم الأول: التعليم الصوتي والإرشادات
   {
     id: 'phonology-and-guides',
     title: { ar: 'القسم الأول: التعليم الصوتي والإرشادات', en: 'Part 1: Phonology and Guides' },
@@ -243,7 +243,7 @@ export const READING_SECTIONS: ExerciseSection[] = [
       },
     ]
   },
-  // القسم الثاني: تمارين النحو والصرف (أصبح الثاني)
+  // القسم الثاني: تمارين النحو والصرف
   {
     id: 'grammar-morphology',
     title: { ar: 'القسم الثاني: تمارين النحو والصرف', en: 'Part 2: Grammar and Morphology Exercises' },
@@ -511,4 +511,6 @@ export const WRITING_SECTIONS: ExerciseSection[] = [
     ]
   }
 ];
-    
+
+// === تصدير EXERCISE_SECTIONS للتوافق مع الكود القديم ===
+export const EXERCISE_SECTIONS = READING_SECTIONS;
