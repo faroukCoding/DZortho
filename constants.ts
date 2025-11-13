@@ -1,6 +1,5 @@
 import { ExerciseSection } from './types';
-
-export const LOGO_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/f80998a6-1070-4d54-8e43-8f0a0c476839/ortholink.png';
+export const LOGO_URL = '/images/1000009626.jpg';
 export const WELCOME_IMAGE_URL = 'https://storage.googleapis.com/aistudio-hosting/workspace-assets/3565f42c-2321-4d32-8419-35c6b92f75a0/learning-companion-welcome.png';
 
 export const WILAYAS = [
